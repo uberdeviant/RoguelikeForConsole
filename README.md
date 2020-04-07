@@ -1,5 +1,5 @@
 # RoguelikeForConsole
-**A small console game we make on our streams!**
+**A small console game that we make on our streams!**
 
 # How to play:
 
