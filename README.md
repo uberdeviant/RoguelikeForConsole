@@ -3,12 +3,12 @@
 
 # How to play:
 
-w - go top
-a - go left
-s - go down
-d - go right
+* w - go top
+* a - go left
+* s - go down
+* d - go right
 
-Collect pizza!!!! PIIIITSA!!!!!
+* Collect pizza!!!! PIIIITSA!!!!!
 
 # License:
 
