@@ -8,7 +8,12 @@
 
 import Foundation
 
-struct Player{
+protocol ObjectProtocol{
+    var symbol: Character {get}
+    var coordinate: Coordinate {get set}
+}
+
+struct Player: ObjectProtocol{
     let symbol: Character = "👮‍♀️"
     
     var speed: Int = 1
@@ -22,18 +27,81 @@ struct Player{
     }
 }
 
-struct Pickup{
+struct Enemy: ObjectProtocol {
+    
+    enum EnemyBasicType{
+        case Zombie
+        case Skeleton
+        case Ghost
+    }
+    
+    let symbol: Character
+    let name: String
+    
+    var speed: Int
+    var health: Int
+    
+    var attack: Int
+    
+    var coordinate: Coordinate
+    
+    init(enemyBasicType: EnemyBasicType) {
+        switch enemyBasicType {
+        case .Zombie:
+            self.symbol = "🧟‍♂️"
+            self.name = "Zombie"
+            
+            self.speed = 1
+            self.health = 10
+            
+            self.attack = 10
+            
+            self.coordinate = Coordinate(x: Int.random(in: 0...Coordinate.maxX), y: Int.random(in: 0...Coordinate.maxY))
+        case .Skeleton:
+            self.symbol = "💀"
+            self.name = "Skeleton"
+            
+            self.speed = 1
+            self.health = 25
+            
+            self.attack = 20
+            
+            self.coordinate = Coordinate(x: Int.random(in: 0...Coordinate.maxX), y: Int.random(in: 0...Coordinate.maxY))
+        case .Ghost:
+            self.symbol = "👻"
+            self.name = "Skeleton"
+            
+            self.speed = 2
+            self.health = 25
+            
+            self.attack = 10
+            
+            self.coordinate = Coordinate(x: Int.random(in: 0...Coordinate.maxX), y: Int.random(in: 0...Coordinate.maxY))
+        }
+    }
+    
+    init(symbol: Character, name: String, speed: Int, health: Int, attack: Int, coordinate: Coordinate) {
+        self.symbol = symbol
+        self.name = name
+        self.speed = speed
+        self.health = health
+        self.attack = attack
+        self.coordinate = coordinate
+    }
+}
+
+struct Pickup: ObjectProtocol{
     enum PowerUpType {
         case speedUp
     }
     let symbol: Character
     let type: PowerUpType
-    let coordinate: Coordinate
+    var coordinate: Coordinate
     
     init(type: PowerUpType) {
         self.symbol = "🍕"
         self.type = type
-        self.coordinate = Coordinate(x: Coordinate.getXCoordinate(by: Int.random(in: 0...CoordinateX.x9.rawValue)), y: Coordinate.getYCoordinate(by: Int.random(in: 0...CoordinateY.y4.rawValue)))
+        self.coordinate = Coordinate(x: Int.random(in: 0...Coordinate.maxX), y: Int.random(in: 0...Coordinate.maxY))
         
     }
 
