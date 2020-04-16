@@ -37,6 +37,7 @@ struct Enemy: ObjectProtocol {
     
     let symbol: Character
     let name: String
+    let lookRange: Int
     
     var speed: Int
     var health: Int
@@ -45,6 +46,31 @@ struct Enemy: ObjectProtocol {
     
     var coordinate: Coordinate
     
+    mutating func followPlayer(player: Player){
+        let xDifference = player.coordinate.x - self.coordinate.x
+        let yDifference = player.coordinate.y - self.coordinate.y
+        
+        if (xDifference < lookRange && xDifference > -lookRange) && (yDifference < lookRange && yDifference > -lookRange){
+            if player.coordinate.x > self.coordinate.x{
+                self.coordinate.x += speed
+            }else{
+                self.coordinate.x -= speed
+            }
+            
+            if player.coordinate.y > self.coordinate.y{
+                self.coordinate.y += speed
+            }else{
+                self.coordinate.y -= speed
+            }
+            self.coordinate.x = self.coordinate.x < 0 ? 0 : coordinate.x
+            self.coordinate.y = self.coordinate.y < 0 ? 0 : coordinate.y
+            
+            self.coordinate.x = self.coordinate.x > Coordinate.maxX ? Coordinate.maxX : coordinate.x
+            self.coordinate.y = self.coordinate.y > Coordinate.maxY ? Coordinate.maxY : coordinate.y
+        }
+        
+    }
+    
     init(enemyBasicType: EnemyBasicType) {
         switch enemyBasicType {
         case .Zombie:
@@ -52,6 +78,7 @@ struct Enemy: ObjectProtocol {
             self.name = "Zombie"
             
             self.speed = 1
+            self.lookRange = 4
             self.health = 10
             
             self.attack = 10
@@ -62,6 +89,7 @@ struct Enemy: ObjectProtocol {
             self.name = "Skeleton"
             
             self.speed = 1
+            self.lookRange = 3
             self.health = 25
             
             self.attack = 20
@@ -71,7 +99,8 @@ struct Enemy: ObjectProtocol {
             self.symbol = "👻"
             self.name = "Skeleton"
             
-            self.speed = 2
+            self.speed = 1
+            self.lookRange = 5
             self.health = 25
             
             self.attack = 10
@@ -80,13 +109,14 @@ struct Enemy: ObjectProtocol {
         }
     }
     
-    init(symbol: Character, name: String, speed: Int, health: Int, attack: Int, coordinate: Coordinate) {
+    init(symbol: Character, name: String, speed: Int, health: Int, lookRange: Int, attack: Int, coordinate: Coordinate) {
         self.symbol = symbol
         self.name = name
         self.speed = speed
         self.health = health
         self.attack = attack
         self.coordinate = coordinate
+        self.lookRange = lookRange
     }
 }
 

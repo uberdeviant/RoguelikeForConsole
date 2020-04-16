@@ -9,12 +9,12 @@
 import Foundation
 
 struct Coordinate: Equatable{
+    
     var x: Int
     var y: Int
     
     static let maxX = 9
     static let maxY = 4
-    
     
     mutating func addOrMinusCoordinate(xNumber: Int, yNumber: Int){
             var numberX = x{
@@ -58,6 +58,11 @@ struct Engine{
         map = createMap()
     }
     
+    mutating func followPlayerByEnemies(){
+        for index in enemies.indices{
+            enemies[index].followPlayer(player: player)
+        }
+    }
     
     func printMap(){
         var line = ""

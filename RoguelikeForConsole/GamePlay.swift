@@ -18,6 +18,7 @@ struct GamePlay {
             let text = readLine()
             if let textCommand = text{
                 readCommand(from: textCommand)
+                engine.followPlayerByEnemies()
                 engine.printMap()
             }
         }
@@ -50,6 +51,7 @@ struct GamePlay {
         }
         
     }
+    
     
     mutating func checkCollision(){
         for (index,pickup) in engine.pickups.enumerated(){
