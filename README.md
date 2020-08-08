@@ -22,4 +22,3 @@ RoguelikeForConsole is licensed under the Apache 2.0 license
 
 * [Patreon](https://www.patreon.com/user?u=32639039)
 * [Twitter](https://twitter.com/mruberdeviant)
-* [Twitch](https://www.twitch.tv/devicast)
